@@ -1,0 +1,82 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Fanout de Pesquisa",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://fanout-pesquisa.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/fanout-pesquisa": {
+      "post": {
+        "operationId": "gerarFanoutPesquisa",
+        "summary": "Gerar Fanout de Pesquisa com TOFU, MOFU e BOFU",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword": {
+                    "type": "string",
+                    "description": "Palavra-chave principal. Ex: 'advogado da família em {KWPARANA1(CIDADE)}'"
+                  }
+                },
+                "required": ["keyword"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fanouts gerados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fanouts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pergunta": { "type": "string" },
+                          "tipo": { "type": "string" }
+                        }
+                      }
+                    },
+                    "pontuacao": {
+                      "type": "object",
+                      "properties": {
+                        "aderencia": { "type": "number" },
+                        "cobertura": { "type": "number" },
+                        "nao_redundancia": { "type": "number" }
+                      }
+                    },
+                    "entidades_acionadas": {
+                      "type": "object",
+                      "properties": {
+                        "nucleo": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        },
+                        "suporte": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
