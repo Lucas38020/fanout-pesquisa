@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://fanout-pesquisa.vercel.app"
+      "url": "https://fanout-pesquisa.vercel.app/"
     }
   ],
   "paths": {
