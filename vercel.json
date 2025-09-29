@@ -3,12 +3,19 @@
   "builds": [
     {
       "src": "index.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": ["openapi.json"]
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/fanout-pesquisa",
+      "dest": "index.py"
+    },
+    {
+      "src": "/openapi.json",
       "dest": "index.py"
     }
   ]
