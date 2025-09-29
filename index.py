@@ -1,22 +1,19 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import Optional, List, Dict
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from typing import Optional, Dict
 
 app = FastAPI()
-
 
 class FanoutInput(BaseModel):
     keyword: str
     matriz_semantica: Optional[Dict] = None
-
 
 @app.post("/api/fanout-pesquisa")
 def gerar_fanout(data: FanoutInput):
     keyword = data.keyword
     matriz = data.matriz_semantica
 
-    # MOCK: Exemplo fixo de fanouts para testes
     return {
         "fanouts": [
             {"pergunta": f"Como atua um {keyword}?", "tipo": "TOFU"},
@@ -35,7 +32,7 @@ def gerar_fanout(data: FanoutInput):
         }
     }
 
-
-@app.get("/openapi.json", include_in_schema=False)
+# ✅ ROTA EXTRA PARA SERVIR O ARQUIVO openapi.json
+@app.get("/openapi.json")
 def serve_openapi():
-    return FileResponse("openapi.json")
+    return FileResponse("openapi.json", media_type="application/json")
