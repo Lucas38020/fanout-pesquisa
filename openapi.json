@@ -2,7 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Fanout de Pesquisa",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "API para gerar fanouts com TOFU, MOFU e BOFU a partir de uma keyword"
   },
   "servers": [
     {
