@@ -1,12 +1,15 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional, List, Dict
+from fastapi.responses import FileResponse
 
 app = FastAPI()
+
 
 class FanoutInput(BaseModel):
     keyword: str
     matriz_semantica: Optional[Dict] = None
+
 
 @app.post("/api/fanout-pesquisa")
 def gerar_fanout(data: FanoutInput):
@@ -31,3 +34,8 @@ def gerar_fanout(data: FanoutInput):
             "suporte": ["divórcio", "guarda", "pensão"]
         }
     }
+
+
+@app.get("/openapi.json", include_in_schema=False)
+def serve_openapi():
+    return FileResponse("openapi.json")
